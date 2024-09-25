@@ -1,0 +1,20 @@
+<!-- publisherComponent.html -->
+
+<template>
+    <lightning-card title="Publisher Component">
+        <div class="slds-p-around_medium">
+            <!-- Input field for the user to enter a message -->
+            <lightning-input 
+                label="Enter Message" 
+                value={message} 
+                onchange={handleChange}>
+            </lightning-input>
+            <!-- Button to publish the message -->
+            <lightning-button 
+                label="Publish Message" 
+                onclick={handlePublish} 
+                class="slds-m-top_small">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>
