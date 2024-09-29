@@ -1,0 +1,59 @@
+<template>
+    <div class="slds-form-element">
+      <label class="slds-form-element__label" for="lookup">{label}</label>
+      <div class="slds-form-element__control">
+        <div class="slds-combobox_container">
+          <div
+            class={comboboxClass}
+            role="combobox"
+            aria-expanded={isDropdownOpen}
+            aria-haspopup="listbox"
+            aria-owns="lookup-listbox"
+          >
+            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+              <input
+                type="text"
+                class="slds-input"
+                id="lookup"
+                placeholder={placeholder}
+                onfocus={handleFocus}
+                oninput={handleInput}
+                onblur={handleBlur}
+                value={searchKey}
+              />
+              <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                <lightning-icon icon-name="utility:search" size="x-small"></lightning-icon>
+              </span>
+            </div>
+            <template if:true={isDropdownOpen}>
+              <div id="lookup-listbox" role="listbox" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid">
+                <ul class="slds-listbox__options" role="presentation">
+                  <template if:true={searchResults}>
+                    <template for:each={searchResults} for:item="result">
+                      <li key={result.id} role="presentation" class="slds-listbox__item" onclick={handleSelect} data-id={result.id}>
+                        <div id={result.id} role="option" class="slds-media slds-listbox__option slds-listbox__option_entity">
+                          <span class="slds-media__figure slds-listbox__option-icon">
+                            <lightning-icon icon-name="standard:default" size="small"></lightning-icon>
+                          </span>
+                          <span class="slds-media__body">
+                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{result.name}</span>
+                          </span>
+                        </div>
+                      </li>
+                    </template>
+                  </template>
+                  <template if:false={searchResults}>
+                    <li role="presentation" class="slds-listbox__item">
+                      <div role="option" class="slds-media slds-listbox__option slds-listbox__option_plain">
+                        <h3 class="slds-text-title_caps">No results found</h3>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
